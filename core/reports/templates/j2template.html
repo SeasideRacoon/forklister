@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+  <title>Forklister report</title>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+          integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+          src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+  <style type="text/css">
+      body {
+          margin: 22pt;
+      }
+
+      h1, h2, h3 {
+          text-align: center;
+      }
+  </style>
+</head>
+
+<body>
+<h1>Forklister report</h1>
+<h2>{{ data.date }}</h2>
+
+{% if data.origin %}
+<div id="header">
+  Fork information on <span style="font-weight: bold">{{ data.origin.full_name }}</span> for {{ data.date }}
+</div>
+{% endif %}
+
+<span id="forks_graph"
+   data-json="{{data.forks_json}}">
+   </span>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="google_graph.js">
+    </script>
+    <div id="series_chart_div" style="width: 900px; height: 500px;"></div>
+
+<div id="forks">
+  <table id="forks-table" class="display dataTable no-footer" role="grid">
+    <thead>
+    <tr role="row">
+      <th class="sorting">url</th>
+      <th class="sorting">ahead</th>
+      <th class="sorting">behind</th>
+      <th class="sorting">stars</th>
+      <th class="sorting">days ago</th>
+      <th class="sorting">deviation</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for fork in data.forks %}
+    <tr>
+      <td role="row">{{fork.url}}</td>
+      <td role="row">{{fork.ahead_by}}</td>
+      <td role="row">{{fork.behind_by}}</td>
+      <td role="row">{{fork.stargazers_count}}</td>
+      <td role="row">{{fork.days_ago}}</td>
+      <td role="row">{{fork.deviation_rate}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+    $('#forks-table').dataTable({
+        paging: false
+    });
+</script>
+</body>
+</html>
