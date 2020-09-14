@@ -47,7 +47,7 @@ python3 forklister.py --help
 #### Arguments
 
 - `-o, --output` output file name
-- `-f, --format` output file format. Can be `csv`, `json`, `ndjson` or `html`, Default is `csv`
+- `-f, --format` output file format. Can be `csv`, `json`, `ndjson` or `html`. Default is `csv`
 - `-sb, --sort-by` sort forks by property, see help. Default is `default`
 - `-so, --sort-order` `asc` or `desc`, default is `desc`
 - `-t, --token` Github API key
